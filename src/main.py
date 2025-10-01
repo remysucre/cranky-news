@@ -20,6 +20,8 @@ def main():
     # Create output directory
     output_dir = Path("output")
     output_dir.mkdir(exist_ok=True)
+    articles_dir = output_dir / "articles"
+    articles_dir.mkdir(exist_ok=True)
 
     # Track processing stats
     successful = 0
@@ -56,7 +58,7 @@ def main():
         # Strip query parameters like ?icid=rss
         slug = slug.split('?')[0]
         filename = f"{slug}.json"
-        output_path = output_dir / filename
+        output_path = articles_dir / filename
 
         # Save to file
         save_particle_json(particle, output_path)
@@ -67,7 +69,7 @@ def main():
         index_entries.append({
             "title": article_meta['title'],
             "summary": article_meta.get('summary', ''),
-            "filename": filename
+            "slug": slug
         })
 
     # Create index.json
@@ -117,7 +119,7 @@ def create_index(output_dir, entries):
         index['content'].append({
             "type": "button",
             "label": "Read full article",
-            "action": f"/{entry['filename']}"
+            "action": f"/articles/{entry['slug']}"
         })
 
         # Spacer
