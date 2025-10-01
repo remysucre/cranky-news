@@ -6,13 +6,19 @@ on:
     - cron: '0 13 * * *'
   workflow_dispatch:  # Allow manual triggering
 
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
 jobs:
   fetch-and-convert:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
 
     steps:
       - name: Checkout repository
