@@ -119,7 +119,7 @@ def create_index(output_dir, entries):
         index['content'].append({
             "type": "button",
             "label": "Read full article",
-            "action": f"/articles/{entry['slug']}"
+            "action": f"/swen/articles/{entry['slug']}"
         })
 
         # Spacer
