@@ -48,8 +48,13 @@ def convert_to_particle(article):
             "text": " | ".join(metadata_text)
         })
 
-    # Add article paragraphs
-    for para in article.get('paragraphs', []):
+    # Add article paragraphs (exclude last paragraph which is fineprint)
+    paragraphs = article.get('paragraphs', [])
+    if paragraphs:
+        # Discard the last paragraph
+        paragraphs = paragraphs[:-1]
+
+    for para in paragraphs:
         if para:
             particle['content'].append({
                 "type": "paragraph",
