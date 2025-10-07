@@ -7,3 +7,5 @@ Install the [Constellation Browser](https://browser.particlestudios.eu/),
  (follow the steps under "Local or remote websites, on your Playdate" in the [doc](https://browser.particlestudios.eu/#testing-your-website)).
 
 You can also try it out using the emulator in [Playdate's SDK](https://play.date/dev/), by following the steps under "Testing your website" in the [doc](https://browser.particlestudios.eu/#testing-your-website). 
+
+![Demo](./demo.gif)

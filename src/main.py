@@ -20,7 +20,7 @@ def main():
 
         section_content = {
             "format": "particle",
-            "title": f"Kagi News - {section_name.title()}",
+            "title": f"Kagi News - {'USA' if section_name == 'usa' else section_name.title()}",
             "content": []
         }
 
