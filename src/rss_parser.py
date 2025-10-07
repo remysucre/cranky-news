@@ -1,16 +1,16 @@
 import feedparser
 
 
-KAGI_BASE_URL = 'https://kite.kagi.com'
-KAGI_SECTIONS = ['world', 'usa', 'business', 'technology', 'science', 'sports', 'gaming']
+KAGI_NEWS = 'https://kite.kagi.com'
+NEWS_SECTIONS = ['world', 'usa', 'business', 'technology', 'science', 'sports', 'gaming']
 
 
 def fetch_all_sections():
     all_articles = {}
 
-    for section_name in KAGI_SECTIONS:
-        print(f"Fetching {section_name} section...")
-        feed = feedparser.parse(f'{KAGI_BASE_URL}/{section_name}.xml')
+    for section in NEWS_SECTIONS:
+        print(f"Fetching {section} news...")
+        feed = feedparser.parse(f'{KAGI_NEWS}/{section}.xml')
 
         articles = []
         for entry in feed.entries:
@@ -23,7 +23,7 @@ def fetch_all_sections():
                 'content': content
             })
 
-        all_articles[section_name] = articles
-        print(f"  Found {len(articles)} articles")
+        all_articles[section] = articles
+        print(f"  Fetched {len(articles)} articles")
 
     return all_articles
