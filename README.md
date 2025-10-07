@@ -2,8 +2,7 @@
 
 Mirror of [Kagi News](https://kite.kagi.com) for [Playdate](https://play.date).
 
-Follow instructions to [sideload](https://help.play.date/games/sideloading/)
- the [Constellation Browser](https://browser.particlestudios.eu/#particle-formatting),
+Follow instructions to install the [Constellation Browser](https://browser.particlestudios.eu/),
  then add http://cranky.news to Favorites 
  (follow the steps under "Local or remote websites, on your Playdate" in the [doc](https://browser.particlestudios.eu/#testing-your-website)).
 
