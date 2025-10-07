@@ -38,8 +38,8 @@
     },
     {
       "type": "button",
-      "label": "Entertainment",
-      "action": "/entertainment/"
+      "label": "Gaming",
+      "action": "/gaming/"
     }
   ]
 }

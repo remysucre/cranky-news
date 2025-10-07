@@ -2,7 +2,7 @@ import feedparser
 
 
 KAGI_BASE_URL = 'https://kite.kagi.com'
-KAGI_SECTIONS = ['world', 'usa', 'business', 'technology', 'science', 'sports', 'entertainment']
+KAGI_SECTIONS = ['world', 'usa', 'business', 'technology', 'science', 'sports', 'gaming']
 
 
 def fetch_all_sections():
