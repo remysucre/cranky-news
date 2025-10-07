@@ -5,7 +5,7 @@ KAGI_NEWS = 'https://kite.kagi.com'
 NEWS_SECTIONS = ['world', 'usa', 'business', 'technology', 'science', 'sports', 'gaming']
 
 
-def fetch_all_sections():
+def fetch_articles():
     all_articles = {}
 
     for section in NEWS_SECTIONS:

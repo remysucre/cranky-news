@@ -2,14 +2,14 @@
 
 import json
 from pathlib import Path
-from rss_parser import fetch_all_sections
+from rss_parser import fetch_articles
 from particle_converter import save_particle_json, html_to_paragraphs, format_date, extract_images
 from image_processor import process_and_save_image
 
 
 def main():
     print("Fetching Kagi News feeds...")
-    all_sections = fetch_all_sections()
+    all_sections = fetch_articles()
 
     output_dir = Path("output")
     output_dir.mkdir(exist_ok=True)
