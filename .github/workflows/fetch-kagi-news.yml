@@ -37,13 +37,17 @@ jobs:
           cd src
           python main.py
 
+      - name: Copy root index.json to output
+        run: |
+          cp index.json output/
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './src/output'
+          path: './output'
 
       - name: Deploy to GitHub Pages
         id: deployment

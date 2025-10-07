@@ -1,0 +1,45 @@
+{
+  "format": "particle",
+  "title": "Kagi News",
+  "content": [
+    {
+      "type": "paragraph",
+      "text": "Mirror of kite.kagi.com, updated daily."
+    },
+    {
+      "type": "button",
+      "label": "World",
+      "action": "/world/"
+    },
+    {
+      "type": "button",
+      "label": "USA",
+      "action": "/usa/"
+    },
+    {
+      "type": "button",
+      "label": "Business",
+      "action": "/business/"
+    },
+    {
+      "type": "button",
+      "label": "Technology",
+      "action": "/technology/"
+    },
+    {
+      "type": "button",
+      "label": "Science",
+      "action": "/science/"
+    },
+    {
+      "type": "button",
+      "label": "Sports",
+      "action": "/sports/"
+    },
+    {
+      "type": "button",
+      "label": "Entertainment",
+      "action": "/entertainment/"
+    }
+  ]
+}
