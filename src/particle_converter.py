@@ -2,10 +2,22 @@ import json
 import re
 from bs4 import BeautifulSoup
 from datetime import datetime
+from image_processor import process_image
 
 
 def strip_source_tags(text):
     return re.sub(r'\s*(?:\[[^\]]+\])+', '', text)
+
+
+def extract_images(html_content):
+    """Extract image URLs from HTML content."""
+    soup = BeautifulSoup(html_content, 'html.parser')
+    images = []
+    for img in soup.find_all('img'):
+        src = img.get('src')
+        if src and src.startswith('http'):
+            images.append(src)
+    return images
 
 
 def html_to_paragraphs(html_content):
@@ -21,42 +33,6 @@ def format_date(date_string):
         return dt.strftime('%d %b %Y')
     except:
         return date_string
-
-
-def convert_to_particle(article):
-    title = article.get('title', 'Untitled')
-
-    if len(title) > 40:
-        title = title[:37] + "..."
-    title = title.encode('ascii', 'ignore').decode('ascii')
-
-    particle = {
-        "format": "particle",
-        "title": title,
-        "content": []
-    }
-
-    particle['content'].append({
-        "type": "paragraph",
-        "text": f"*{article['title']}*"
-    })
-
-    if article.get('published'):
-        particle['content'].append({
-            "type": "paragraph",
-            "text": format_date(article['published'])
-        })
-
-    content = article.get('content', '')
-    if content:
-        paragraphs = html_to_paragraphs(content)
-        for para in paragraphs:
-            particle['content'].append({
-                "type": "paragraph",
-                "text": para
-            })
-
-    return particle
 
 
 def save_particle_json(particle_data, output_path):

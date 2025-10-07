@@ -3,7 +3,8 @@
 import json
 from pathlib import Path
 from rss_parser import fetch_all_sections
-from particle_converter import convert_to_particle, save_particle_json, html_to_paragraphs, format_date
+from particle_converter import save_particle_json, html_to_paragraphs, format_date, extract_images
+from image_processor import process_image
 
 
 def main():
@@ -43,6 +44,17 @@ def main():
                         "type": "paragraph",
                         "text": para
                     })
+
+                # Extract and process the first image if available
+                images = extract_images(content)
+                if images:
+                    print(f"  Processing image for: {article['title'][:50]}...")
+                    image_data = process_image(images[0])
+                    if image_data:
+                        section_content['content'].append(image_data)
+                        print(f"    ✓ Image added")
+                    else:
+                        print(f"    ✗ Failed to process image")
 
             section_content['content'].append({
                 "type": "paragraph",
