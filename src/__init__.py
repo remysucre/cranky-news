@@ -1,1 +1,1 @@
-# Package initialization
+"""Kagi News mirror for Playdate Constellation browser."""
