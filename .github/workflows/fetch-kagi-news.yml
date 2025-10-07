@@ -34,12 +34,11 @@ jobs:
 
       - name: Run article fetcher
         run: |
-          cd src
-          python main.py
+          python src/main.py
 
       - name: Copy root index.json to output
         run: |
-          cp index.json output/
+          cp index.json output/index.json
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
