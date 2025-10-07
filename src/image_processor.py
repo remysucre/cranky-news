@@ -4,8 +4,8 @@ from PIL import Image
 import base64
 
 
-MAX_WIDTH = 200  # Reduced from 400 to keep image data smaller
-MAX_HEIGHT = 120  # Reduced from 240 to keep image data smaller
+MAX_WIDTH = 300  # Reduced from 400 to keep image data smaller
+MAX_HEIGHT = 180  # Reduced from 240 to keep image data smaller
 
 
 def download_image(url):
@@ -104,14 +104,16 @@ def image_to_particle_pixels(img):
     return ' '.join(lines)
 
 
-def process_image(url, max_width=MAX_WIDTH, max_height=MAX_HEIGHT):
+def process_and_save_image(url, output_path, max_width=MAX_WIDTH, max_height=MAX_HEIGHT):
     """
-    Download and process an image to particle format.
-    Returns dict with particle image data or None if processing fails.
+    Download, process an image to particle format, and save to a file.
+    Returns True if successful, False otherwise.
     """
+    import json
+
     img = download_image(url)
     if img is None:
-        return None
+        return False
 
     # Resize to fit Playdate screen
     img = resize_image(img, max_width, max_height)
@@ -134,14 +136,25 @@ def process_image(url, max_width=MAX_WIDTH, max_height=MAX_HEIGHT):
     # Convert to particle pixel format
     pixels = image_to_particle_pixels(img)
 
-    return {
-        'type': 'image',
-        'width': width,
-        'height': height,
-        'pixels': pixels,
-        'style': {
-            'scale': 1,  # Use scale 1 for larger images
-            'margin-top': 8,
-            'margin-bottom': 8
-        }
+    # Create particle document for the image
+    particle_doc = {
+        'format': 'particle',
+        'title': 'Image',
+        'content': [{
+            'type': 'image',
+            'width': width,
+            'height': height,
+            'pixels': pixels,
+            'style': {
+                'scale': 1,
+                'margin-top': 8,
+                'margin-bottom': 8
+            }
+        }]
     }
+
+    # Save to file
+    with open(output_path, 'w', encoding='utf-8') as f:
+        json.dump(particle_doc, f, indent=2, ensure_ascii=False)
+
+    return True

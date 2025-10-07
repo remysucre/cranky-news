@@ -2,7 +2,6 @@ import json
 import re
 from bs4 import BeautifulSoup
 from datetime import datetime
-from image_processor import process_image
 
 
 def strip_source_tags(text):

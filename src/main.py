@@ -4,7 +4,7 @@ import json
 from pathlib import Path
 from rss_parser import fetch_all_sections
 from particle_converter import save_particle_json, html_to_paragraphs, format_date, extract_images
-from image_processor import process_image
+from image_processor import process_and_save_image
 
 
 def main():
@@ -24,7 +24,7 @@ def main():
             "content": []
         }
 
-        for article in articles:
+        for idx, article in enumerate(articles):
             section_content['content'].append({
                 "type": "paragraph",
                 "text": f"*{article['title']}*"
@@ -49,10 +49,16 @@ def main():
                 images = extract_images(content)
                 if images:
                     print(f"  Processing image for: {article['title'][:50]}...")
-                    image_data = process_image(images[0])
-                    if image_data:
-                        section_content['content'].append(image_data)
-                        print(f"    ✓ Image added")
+                    image_filename = f"image_{idx}.json"
+                    image_path = section_dir / image_filename
+                    if process_and_save_image(images[0], image_path):
+                        # Add a button to view the image
+                        section_content['content'].append({
+                            "type": "button",
+                            "label": "View Image",
+                            "action": f"/{section_name}/{image_filename[:-5]}"  # Remove .json extension
+                        })
+                        print(f"    ✓ Image saved to {image_filename}")
                     else:
                         print(f"    ✗ Failed to process image")
 
