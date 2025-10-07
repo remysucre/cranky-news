@@ -36,9 +36,9 @@ jobs:
         run: |
           python src/main.py
 
-      - name: Copy root index.json to output
+      - name: Copy index pages to output
         run: |
-          cp index.json output/index.json
+          cp index.* output/
 
       - name: Setup Pages
         uses: actions/configure-pages@v4
