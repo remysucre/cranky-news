@@ -1,10 +1,10 @@
 {
   "format": "particle",
-  "title": "Kagi News",
+  "title": "Cranky News",
   "content": [
     {
       "type": "paragraph",
-      "text": "Mirror of kite.kagi.com, updated daily."
+      "text": "Mirror of Kagi News, updated daily."
     },
     {
       "type": "button",
