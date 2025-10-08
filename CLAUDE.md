@@ -9,7 +9,7 @@ This project mirrors articles from Kagi News (kite.kagi.com) and converts them t
 ## Data Flow
 
 1. **Source**: Kagi News RSS feeds at https://kite.kagi.com/{section}.xml
-2. **Sections**: world, usa, business, technology, science, sports, gaming
+2. **Sections**: world, usa, business, tech, science, sports, gaming
 3. **Processing**: RSS feeds contain full article text in HTML format - parse with BeautifulSoup
 4. **Output**: Each section gets its own directory with a single `index.json` containing all articles
 

@@ -23,8 +23,8 @@
     },
     {
       "type": "button",
-      "label": "Technology",
-      "action": "/technology/"
+      "label": "Tech",
+      "action": "/tech/"
     },
     {
       "type": "button",
