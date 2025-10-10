@@ -2,7 +2,7 @@ import feedparser
 
 
 KAGI_NEWS = 'https://kite.kagi.com'
-NEWS_SECTIONS = ['world', 'usa', 'business', 'tech', 'science', 'sports', 'gaming']
+NEWS_SECTIONS = ['world', 'usa', 'business', 'tech', 'science', 'sports', 'gaming', 'canada']
 
 
 def fetch_articles():
