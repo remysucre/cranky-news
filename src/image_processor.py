@@ -86,6 +86,52 @@ def atkinson_dither(img):
     return result
 
 
+def compress_pixel_row(row):
+    """
+    Compress a row of pixels using particle format compression:
+    - Run-length encode consecutive 1's as uppercase letters (A=1, B=2, ..., Z=26)
+    - Run-length encode consecutive 0's as lowercase letters (a=1, b=2, ..., z=26)
+    - Drop trailing zeros (row ends with space separator)
+    """
+    if not row:
+        return ''
+
+    # Strip trailing zeros
+    row = row.rstrip('0')
+    if not row:
+        return ''
+
+    compressed = []
+    i = 0
+    while i < len(row):
+        char = row[i]
+        count = 1
+
+        # Count consecutive same characters
+        while i + count < len(row) and row[i + count] == char:
+            count += 1
+
+        # Encode runs (handle runs longer than 26 by splitting)
+        remaining = count
+        while remaining > 0:
+            # Max run length is 26 (Z/z)
+            run_len = min(remaining, 26)
+
+            if char == '1':
+                # Uppercase for 1's (A=1, B=2, ..., Z=26)
+                compressed.append(chr(ord('A') + run_len - 1))
+            elif char == '0':
+                # Lowercase for 0's (a=1, b=2, ..., z=26)
+                compressed.append(chr(ord('a') + run_len - 1))
+
+            remaining -= run_len
+
+        # Move to next run
+        i += count
+
+    return ''.join(compressed)
+
+
 def image_to_particle_pixels(img):
     """Convert 1-bit PIL Image to particle pixel format string."""
     width, height = img.size
@@ -99,7 +145,10 @@ def image_to_particle_pixels(img):
             # In particle format, 0 is white, 1 is black
             pixel_value = pixels[x, y]
             line += '0' if pixel_value else '1'
-        lines.append(line)
+
+        # Compress the row
+        compressed_line = compress_pixel_row(line)
+        lines.append(compressed_line)
 
     return ' '.join(lines)
 
