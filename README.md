@@ -6,4 +6,4 @@ Install the [Constellation Browser](https://browser.particlestudios.eu/) and fin
 
 You can also try it out using the simulator in [Playdate's SDK](https://play.date/dev/). 
 
-![Demo](./demo.gif)
+![Demo](./demo.gif) 
