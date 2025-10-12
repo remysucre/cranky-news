@@ -1,3 +1,5 @@
+# Cranky News
+
 Mirror of [Kagi News](https://kite.kagi.com) for [Playdate](https://play.date).
 
 Install the [Constellation Browser](https://browser.particlestudios.eu/) and find Cranky News in the directory. 
