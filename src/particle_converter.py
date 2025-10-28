@@ -22,7 +22,9 @@ def extract_images(html_content):
 def html_to_paragraphs(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     paragraphs = soup.find_all('p')
-    cleaned = [strip_source_tags(p.get_text(strip=True)) for p in paragraphs if p.get_text(strip=True)]
+    # Constellation browser's font does not display the non-breaking hyphen "‑" properly.
+    # Once that's fixed remove the replace call.
+    cleaned = [strip_source_tags(p.get_text(strip=True)).replace('‑', '-') for p in paragraphs if p.get_text(strip=True)]
     return [p for p in cleaned if p]
 
 
