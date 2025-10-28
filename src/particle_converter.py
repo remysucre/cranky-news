@@ -3,11 +3,6 @@ import re
 from bs4 import BeautifulSoup
 from datetime import datetime
 
-
-def strip_source_tags(text):
-    return re.sub(r'\s*(?:\[[^\]]+\]\s*)+', '', text)
-
-
 def extract_images(html_content):
     """Extract image URLs from HTML content."""
     soup = BeautifulSoup(html_content, 'html.parser')
@@ -24,7 +19,7 @@ def html_to_paragraphs(html_content):
     paragraphs = soup.find_all('p')
     # Constellation browser's font does not display the non-breaking hyphen "‑" properly.
     # Once that's fixed remove the replace call.
-    cleaned = [strip_source_tags(p.get_text(strip=True)).replace('‑', '-') for p in paragraphs if p.get_text(strip=True)]
+    cleaned = [p.get_text(strip=True).replace('‑', '-') for p in paragraphs if p.get_text(strip=True)]
     return [p for p in cleaned if p]
 
 
