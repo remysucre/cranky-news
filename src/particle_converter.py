@@ -5,7 +5,7 @@ from datetime import datetime
 
 
 def strip_source_tags(text):
-    return re.sub(r'\s*(?:\[[^\]]+\])+', '', text)
+    return re.sub(r'\s*(?:\[[^\]]+\])+\s*', '', text)
 
 
 def extract_images(html_content):
