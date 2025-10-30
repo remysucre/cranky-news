@@ -13,13 +13,15 @@ def extract_images(html_content):
             images.append(src)
     return images
 
+# Replace certain characters that do not render with the font used by Constellation browser
+fallback_chars = {
+    '‑': '-' # replace non-breaking hyphen with dash
+}
 
 def html_to_paragraphs(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')
     paragraphs = soup.find_all('p')
-    # Constellation browser's font does not display the non-breaking hyphen "‑" properly.
-    # Once that's fixed remove the replace call.
-    cleaned = [p.get_text(strip=True).replace('‑', '-') for p in paragraphs if p.get_text(strip=True)]
+    cleaned = [p.get_text(strip=True).translate(fallback_chars) for p in paragraphs if p.get_text(strip=True)]
     return [p for p in cleaned if p]
 
 
