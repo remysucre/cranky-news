@@ -14,9 +14,9 @@ def extract_images(html_content):
     return images
 
 # Replace certain characters that do not render with the font used by Constellation browser
-fallback_chars = {
-    '‑': '-' # replace non-breaking hyphen with dash
-}
+fallback_chars = str.maketrans({
+    "‑": "-" # replace non-breaking hyphen with dash
+})
 
 def html_to_paragraphs(html_content):
     soup = BeautifulSoup(html_content, 'html.parser')

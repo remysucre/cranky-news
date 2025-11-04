@@ -3,7 +3,7 @@
 import json
 from pathlib import Path
 from rss_parser import fetch_articles
-from particle_converter import save_particle_json, html_to_paragraphs, format_date, extract_images
+from particle_converter import save_particle_json, html_to_paragraphs, format_date, extract_images, fallback_chars
 from image_processor import process_and_save_image
 
 
@@ -27,7 +27,7 @@ def main():
         for idx, article in enumerate(articles):
             section_content['content'].append({
                 "type": "paragraph",
-                "text": f"*{article['title']}*"
+                "text": f"*{article['title'].translate(fallback_chars)}*"
             })
 
             if article.get('published'):
